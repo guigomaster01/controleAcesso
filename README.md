@@ -1,8 +1,5 @@
 # 🚌 Controle de Acesso - Registro de Ônibus
 
-
-# 🚌 Controle de Acesso - Registro de Ônibus
-
 Este é um aplicativo Flask simples para registrar entradas e saídas de ônibus, colaboradores e visitantes na empresa. Os registros são salvos em um banco de dados SQLite e podem ser exportados para Excel.
 
 ---
