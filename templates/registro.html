@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Entrada/Saída</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Registrar Entrada/Saída</h1>
+        <form id="formRegistro">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+
+            <div class="form-group">
+                <label for="registro">Registro (Para colaboradores):</label>
+                <input type="number" id="registro" name="registro">
+            </div>
+
+            <div class="form-group">
+                <label for="tipo">Categoria:</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="Avaria">Avaria</option>
+                    <option value="Entrega de Encomendas">Entrega de Encomendas</option>
+                    <option value="Entrega de Marmita">Entrega de Marmita</option>
+                    <option value="Visitante">Visitante</option>
+                    <option value="Colaborador de Outra Empresa">Colaborador de Outra Empresa</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Movimentação:</label>
+                <div class="radio-container">
+                    <label><input type="radio" name="movimentacao" value="Entrada" required> Entrada</label>
+                    <label><input type="radio" name="movimentacao" value="Saída" required> Saída</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="prefixoColetivo">Prefixo:</label>
+                <input type="text" id="prefixoColetivo" name="prefixoColetivo">
+            </div>
+
+            <div class="form-group">
+                <label for="observacoes">Observações:</label>
+                <textarea id="observacoes" name="observacoes" rows="4" required></textarea>
+            </div>
+
+            <button type="submit">Salvar Registro</button>
+            <a href="{{ url_for('visualizar') }}" class="button">Ver todos os registros</a>
+            <a href="{{ url_for('exportar_excel') }}" class="button">Exportar para Excel</a>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("formRegistro").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+
+            fetch("/registrar", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                if (data.success) this.reset();
+            })
+            .catch(error => {
+                alert("Erro ao registrar.");
+                console.error(error);
+            });
+        });
+    </script>
+</body>
+</html>

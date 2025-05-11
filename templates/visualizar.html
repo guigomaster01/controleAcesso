@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros Realizados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Todos os Registros</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data/Hora</th>
+                    <th>Nome</th>
+                    <th>Registro</th>
+                    <th>Categoria</th>
+                    <th>Movimentação</th>
+                    <th>Prefixo</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reg in registros %}
+                <tr>
+                    <td>{{ reg['data_hora'] }}</td>
+                    <td>{{ reg['nome'] }}</td>
+                    <td>{{ reg['registro'] }}</td>
+                    <td>{{ reg['tipo'] }}</td>
+                    <td>{{ reg['movimentacao'] }}</td>
+                    <td>{{ reg['prefixoColetivo'] }}</td>
+                    <td>{{ reg['observacoes'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p> <a href="{{ url_for('index') }}" class="button">Voltar para o formulário</a></button></p>
+
+
+    </div>
+</body>
+</html>
